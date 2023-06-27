@@ -1,0 +1,255 @@
+/*
+Assignment 1 Testing.txt
+Name: Stephen Davidson 
+Student_ID: 100805460
+*/
+
+------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+TASK 1 - PALINDROME
+------------------------------------------------------------------------------------------------------
+--- 
+//Empty string
+Enter a string: 
+
+true
+
+--- 
+//Single Alpha Character
+Enter a string: a
+
+true
+
+--- 
+//Single Non-Alpha Character 
+Enter a string: 5
+
+true
+
+--- 
+//Given test case 1
+Enter a string: Otto
+
+true
+
+--- 
+//Given test case 2
+Enter a string: racecar
+
+true 
+
+--- 
+//Given test case 3
+Enter a string: A man, a plan, a canal, Panama!
+
+true
+
+--- 
+//Given test case 4
+Enter a string: David 
+
+false 
+
+--- 
+//Test case combining alpha, digits, spaces, and punctuation
+Enter a string: t2h3i4s!!!s 34234i123h12t
+
+true
+
+------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+TASK 2 - VALID
+------------------------------------------------------------------------------------------------------
+---
+//Empty string
+
+Enter a string: 
+
+false
+
+---
+//Test value 1
+Enter a string: var 
+
+true 
+
+--- 
+//Test value 2
+Enter a string: var2
+
+true 
+
+--- 
+//Test value 3
+Enter a string: var_2
+
+true 
+
+---
+//Test value 4
+Enter a string: 2var 
+
+false 
+
+--- 
+//Test value 5
+Enter a string: _var2
+
+false 
+
+--- 
+//Test value 6 
+Enter a string: _ 
+
+false 
+
+--- 
+//Test with a whitespace. 
+Enter a string: This has whitespace 
+
+false 
+
+--- 
+//Test with punctuation
+Enter a string: WoW!
+
+false
+
+------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+TASK 3 - ENCIPHER
+------------------------------------------------------------------------------------------------------
+---
+//Empty string 
+
+Substitute method result: 
+Shift method result: 
+
+--- 
+//Test values 1
+Enter a string: David Brown
+Enter a shift length: 5
+
+Substitute method result: BATZB VMJUH
+Shift method result: IFANI GWTBS
+
+--- 
+//Test values 2
+Enter a string: David Brown
+Enter a shift length: 9
+
+Substitute method result: BATZB VMJUH
+Shift method result: MJERM KAXFW
+
+---
+//Test values 3
+Enter a string: David Brown
+Enter a shift length: 26
+
+Substitute method result: BATZB VMJUH
+Shift method result: DAVID BROWN
+
+--- 
+//Test values 4
+Enter a string: CP213
+Enter a shift length: 2
+
+Substitute method result: IK213
+Shift method result: ER213
+
+--- 
+//Test shift value >26
+Enter a string: CP213
+Enter a shift length: 150
+
+Substitute method result: IK213
+Shift method result: WJ213
+
+--- 
+//Test shift value < 0
+Enter a string: ABC
+Enter a shift length: -1
+
+Substitute method result: AVI
+Shift method result: ZAB
+
+--- 
+//Test with punctuation marks
+Enter a string: &&&***abc
+Enter a shift length: 26
+
+Substitute method result: &&&***AVI
+Shift method result: &&&***ABC
+
+------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+TASK 4 - LeapYear
+------------------------------------------------------------------------------------------------------
+--- 
+//Test value 1
+Enter a year: 2000
+2000 is a leap year.
+
+--- 
+//Test value 2
+Enter a year: 1900
+1900 is not a leap year.
+
+--- 
+//Test value 3
+Enter a year: 2004
+2004 is a leap year.
+
+--- 
+//Test value 4
+Enter year: 1999
+1999 is not a leap year.
+
+--- 
+//Value less than 100 
+Enter a year: 96
+96 is a leap year.
+
+------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+TASK 5 - Device
+------------------------------------------------------------------------------------------------------
+--- 
+//Test value 1
+Enter days: 1
+
+badCode - Days: 1 Year: 1980
+goodCode - Days: 1 Year: 1980
+
+--- 
+//Test value 2
+Enter days: 360 
+
+badCode - Days: 360 Year: 1980
+goodCode - Days: 360 Year: 1980
+
+--- 
+//Test value 3
+Enter days: 400 
+
+badCode - Days: 360 Year: 1980
+goodCode - Days: 360 Year: 1980
+
+--- 
+//Test value 4
+Enter days: 10593
+
+bad code enters infinite loop 
+goodCode - Days: 10593 Year: 2009
+
+--- 
+//Test 366 days
+Enter days: 366
+
+bad code enters infinite loop
+goodCode - Days: 366 Year: 1981
