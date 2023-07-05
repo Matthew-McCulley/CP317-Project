@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="zip-test" default="all" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<target name="clean">
+		<delete>
+		   <fileset dir="src/cp213">
+		      <include name="**/*"/>
+		   </fileset>
+		</delete>
+	</target>
+
+	
+	 <target name="compile-unzip">
+	         <javac srcdir="src/unzip" destdir="bin" includeantruntime="false" />
+	 </target>
+	 
+	 <target name="run-unzip" depends = "compile-unzip">
+	         <java classname="unzip.Unzip" classpath="bin" fork="true" />
+	 </target>
+	 
+	 <target name="compile-cp213" depends="run-unzip">
+	         <javac srcdir="src/cp213" destdir="bin" includeantruntime="false" />
+	 </target>
+	 
+	 
+	 
+	 
+	  <target name="compile-Tests">
+	         <javac srcdir="src/tests" destdir="bin" includeantruntime="false" >
+		         <classPath>
+		         	<pathelement location = "bin"/>
+		         	<pathelement location = "lib/org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
+		         	<pathelement location = "lib/org.junit_4.13.2.v20211018-1956.jar"/>
+		         </classPath>
+	         </javac>
+	 </target>
+	 
+	 <target name="run-testSuite" depends="compile-Tests">
+	         <java classname="tests.TestSuite" fork="true">
+	         <classPath>
+		         	<pathelement location = "bin"/>
+		         	<pathelement location = "lib/org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
+		         	<pathelement location = "lib/org.junit_4.13.2.v20211018-1956.jar"/>
+		         </classPath>
+	         </java>
+	 </target>
+	 
+	 
+	 
+	 
+	
+	<target name="all" depends="clean, compile-unzip, run-unzip, compile-cp213, compile-Tests, run-testSuite">
+        <echo message="All targets executed successfully." />
+    </target>
+
+</project>
