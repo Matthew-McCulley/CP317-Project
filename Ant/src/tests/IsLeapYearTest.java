@@ -47,7 +47,7 @@ public class IsLeapYearTest {
 	@Parameterized.Parameters
 	public static Collection<Object[]> variablesName() {
 		return  Arrays.asList(new Object[][] {
-			{1200, true},
+			{1212, true},
 			{1700, false},
 			{1997, false},
 			{2000, true}

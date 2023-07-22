@@ -1,21 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="zip-test" default="all" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="zip-test" default="afterLoop" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
 
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+		  <classpath>
+		    <pathelement location="lib/ant-contrib-0.3.jar"/>
+		  </classpath>
+	</taskdef>
+	
+	<target name="afterLoop" depends="compile-exportResults, loop, run-zipFeedback">
+	        <echo message="All targets executed successfully." />
+	</target>
+	
+	<target name="compile-test-unzip">
+		<javac srcdir="src/unzip" destdir="bin" includeantruntime="false">
+			<classpath>
+	         	<pathelement location = "lib/Spire.Doc.jar"/>
+
+			</classpath>
+			</javac>
+	</target>
+			 
+	<target name="run-test-unzip" depends = "compile-test-unzip">
+		<java classname="unzip.TestUnzip" classpath="bin" fork="true">
+		</java>
+	</target>
+		
+		<target name="loop" depends="run-test-unzip">
+		  <foreach target="all" param="theFile">
+		  	<path>
+		  		
+		    <fileset dir="testPackage/" casesensitive="yes">
+		    </fileset>
+		    	</path>
+		  </foreach>
+		</target>
+	
 	<target name="clean">
 		<delete>
 		   <fileset dir="src/cp213">
 		      <include name="**/*"/>
 		   </fileset>
+			<fileset dir="bin/cp213">
+					      <include name="**/*"/>
+			</fileset>
 		</delete>
 	</target>
 
 	
-	 <target name="compile-unzip">
-	         <javac srcdir="src/unzip" destdir="bin" includeantruntime="false" />
-	 </target>
+	
+	
 	 
-	 <target name="run-unzip" depends = "compile-unzip">
-	         <java classname="unzip.Unzip" classpath="bin" fork="true" />
+	 
+	 <target name="run-unzip" depends = "clean">
+	         <java classname="unzip.Unzip" classpath="bin" fork="true">
+	         	<arg value = "${theFile}"/>
+	         	<classpath>
+		         	<pathelement location = "lib/Spire.Doc.jar"/>
+	         	</classpath>
+	         </java>
 	 </target>
 	 
 	 <target name="compile-cp213" depends="run-unzip">
@@ -26,8 +68,10 @@
 	 
 	 
 	  <target name="compile-Tests">
-	         <javac srcdir="src/tests" destdir="bin" includeantruntime="false" >
+	         <javac srcdir="src/tests" destdir="bin" includeantruntime="false" failonerror="false">
 		         <classPath>
+		         	<pathelement location = "lib/commons-csv-1.10.0.jar"/>
+		         	<pathelement location = "lib/Spire.Doc.jar"/>
 		         	<pathelement location = "bin"/>
 		         	<pathelement location = "lib/org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
 		         	<pathelement location = "lib/org.junit_4.13.2.v20211018-1956.jar"/>
@@ -37,19 +81,44 @@
 	 
 	 <target name="run-testSuite" depends="compile-Tests">
 	         <java classname="tests.TestSuite" fork="true">
+	         <arg value = "${theFile}"/>
 	         <classPath>
+		         	<pathelement location = "lib/Spire.Doc.jar"/>
 		         	<pathelement location = "bin"/>
+         		<pathelement location = "lib/commons-csv-1.10.0.jar"/>
 		         	<pathelement location = "lib/org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
 		         	<pathelement location = "lib/org.junit_4.13.2.v20211018-1956.jar"/>
 		         </classPath>
 	         </java>
 	 </target>
+	
+	
+	<target name="compile-exportResults">
+		         <javac srcdir="src/exportResults" destdir="bin" includeantruntime="false" failonerror="false">
+		         	<classpath>
+		         		<pathelement location = "lib/commons-csv-1.10.0.jar"/>
+
+		         	</classpath>
+		         </javac>
+		 </target>
+		 
+		 <target name="run-zipFeedback" depends="compile-exportResults">
+		         <java classname="exportResults.ZipFeedback" fork="true">
+		         	<classpath>
+		         		<pathelement location = "bin"/>
+					</classpath>
+		         </java>
+		 </target>
 	 
 	 
-	 
+	<target name="compile-fileOperations">
+			         <javac srcdir="src/fileOperations" destdir="bin" includeantruntime="false" failonerror="false">
+				         
+			         </javac>
+			 </target>
 	 
 	
-	<target name="all" depends="clean, compile-unzip, run-unzip, compile-cp213, compile-Tests, run-testSuite">
+	<target name="all" depends="clean, run-unzip, compile-cp213, compile-fileOperations, compile-Tests, run-testSuite">
         <echo message="All targets executed successfully." />
     </target>
 

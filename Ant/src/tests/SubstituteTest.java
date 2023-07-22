@@ -7,6 +7,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.spire.doc.*;
+import com.spire.doc.documents.*;
+
 import cp213.Encipher;
 
 import org.junit.runner.notification.Failure;
@@ -25,7 +28,7 @@ import org.junit.runner.Description;
 import org.junit.runners.JUnit4;
 
 @RunWith(Parameterized.class)
-public class SubstituteTest {
+public class SubstituteTest extends TestSuite{
 	
 	private static String s;
 	private static String cipherText;
@@ -55,7 +58,7 @@ public class SubstituteTest {
     // Your test methods go here
     @Test
     public void checkShift() {
-        System.out.println("  Test: shift("+  s + ", " + cipherText +  ")" );
+        System.out.println("  Test: substittute("+  s + ", " + cipherText +  ")" );
     	assertEquals(expected, Encipher.substitute(s, cipherText));
 	}
 }

@@ -6,13 +6,25 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import com.spire.doc.*;
+import com.spire.doc.documents.*;
+ 
 
 public class Unzip {
 
 	public static void main(String[] args) {
-		String zipFilePath = System.getProperty("user.dir") + "/testPackage/mccu4290_a01.zip"; // Destination directory for the
+		String zipFilePath = args[0]; // Destination directory for the
 		String targetDirectory = System.getProperty("user.dir") + "/src/cp213";
 		unzipJavaProject(zipFilePath, targetDirectory);
+		
+		int index = args[0].indexOf("testPackage/") + "testPackage/".length();
+		String markedFileName = args[0].substring(index);
+		markedFileName += " marked";
+		System.out.println(markedFileName);
+		Document document = new Document();
+		Section section = document.addSection();
+		Paragraph paragraph = section.addParagraph();
+		document.saveToFile(System.getProperty("user.dir") + "/markedFiles/" + markedFileName + ".docx", FileFormat.Docx);
 	}
 	
 	public static void unzipJavaProject(String zipFilePath, String targetDirectory) {
@@ -20,7 +32,7 @@ public class Unzip {
 
 		try (ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(zipFilePath))) {
 			ZipEntry zipEntry = zipInputStream.getNextEntry();
-
+			System.out.println(zipEntry.toString());
 			while (zipEntry != null) {
 				String fileName = new File(zipEntry.getName()).getName();
 				if (fileName.contains("Device.java") || fileName.contains("Encipher.java")
