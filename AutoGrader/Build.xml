@@ -40,10 +40,19 @@
 		   <fileset dir="src/cp213">
 		      <include name="**/*"/>
 		   </fileset>
-			<fileset dir="bin/cp213">
-					      <include name="**/*"/>
-			</fileset>
 		</delete>
+		<available file="bin/cp213" property="bin.cp213.present"/>
+
+		    <if>
+		        <available file="bin/cp213" type="dir"/>
+		        <then>
+		        	<delete>
+		        		<fileset dir="src/cp213">
+		        			 <include name="**/*"/>
+		        		</fileset>
+		        	</delete>
+		        </then>
+		    </if>
 	</target>
 
 	
