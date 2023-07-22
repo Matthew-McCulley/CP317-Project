@@ -14,17 +14,17 @@ public class Unzip {
 
 	public static void main(String[] args) {
 		String zipFilePath = args[0]; // Destination directory for the
-		String targetDirectory = System.getProperty("user.dir") + "/src/cp213";
+		String targetDirectory = System.getProperty("user.dir") + File.separatorChar + "src" + File.separatorChar + "cp213";
 		unzipJavaProject(zipFilePath, targetDirectory);
 		
-		int index = args[0].indexOf("testPackage/") + "testPackage/".length();
+		int index = args[0].indexOf("testPackage" + File.separatorChar) + ("testPackage" + File.separatorChar).length();
 		String markedFileName = args[0].substring(index);
 		markedFileName += " marked";
 		System.out.println(markedFileName);
 		Document document = new Document();
 		Section section = document.addSection();
 		Paragraph paragraph = section.addParagraph();
-		document.saveToFile(System.getProperty("user.dir") + "/markedFiles/" + markedFileName + ".docx", FileFormat.Docx);
+		document.saveToFile(System.getProperty("user.dir") + File.separatorChar+ "markedFiles"+ File.separatorChar + markedFileName + ".docx", FileFormat.Docx);
 	}
 	
 	public static void unzipJavaProject(String zipFilePath, String targetDirectory) {

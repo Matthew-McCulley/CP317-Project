@@ -2,7 +2,7 @@ package tests;
 import fileOperations.StudentId;
 
 import java.io.ByteArrayOutputStream;
-
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -66,10 +66,10 @@ public class TestSuite {
 		Paragraph paragraph = section.addParagraph();
 		paragraph.setText(consoleOutput);
 
-		int index = args[0].indexOf("testPackage/") + "testPackage/".length();
+		int index = args[0].indexOf("testPackage" + File.separatorChar) + ("testPackage" + File.separatorChar).length();
 		String markedFileName = args[0].substring(index);
 		markedFileName += " marked";
-		document.saveToFile(System.getProperty("user.dir") + "/markedFiles/" + markedFileName + ".docx",
+		document.saveToFile(System.getProperty("user.dir") +File.separatorChar +"markedFiles" + File.separatorChar + markedFileName + ".docx",
 				FileFormat.Docx);
 
 		if (flag) {

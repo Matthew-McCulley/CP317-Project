@@ -1,5 +1,6 @@
 package exportResults;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,7 +13,7 @@ import org.apache.commons.csv.CSVRecord;
 
 public class Csv {
 	public static void writeMarkToFile(Integer mark, String studentId) throws IOException {
-		String filePath = System.getProperty("user.dir") + "/Marks.csv";
+		String filePath = System.getProperty("user.dir") +  File.separatorChar + "Marks.csv";
 		String rowTitle = "#" + studentId;
 		String columnTitle = "Testing Assignment Points Grade <Numeric MaxPoints:174 Weight:10>";
 		String stringMark = mark.toString();

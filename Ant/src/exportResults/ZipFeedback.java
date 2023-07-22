@@ -10,8 +10,8 @@ import java.util.zip.ZipOutputStream;
 public class ZipFeedback {
 	public static void main(String[] args) {
 		ZipOutputStream zos;
-		String feedbackFolder = System.getProperty("user.dir") + "/markedFiles/";
-		String destinationDirectory = System.getProperty("user.dir") + "/Assignment 1 Bulk Feedback.zip";
+		String feedbackFolder = System.getProperty("user.dir") + File.separatorChar + "markedFiles"  + File.separatorChar;
+		String destinationDirectory = System.getProperty("user.dir") +  + File.separatorChar + "Assignment 1 Bulk Feedback.zip";
 		File folder = new File(feedbackFolder);
 
 		try {

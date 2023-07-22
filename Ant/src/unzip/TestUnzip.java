@@ -9,8 +9,8 @@ import java.util.zip.ZipInputStream;
 public class TestUnzip {
 
 	public static void main(String[] args) {
-		String zipFilePath = System.getProperty("user.dir") + "/test/Assignment_Submissions.zip"; // Destination directory for the
-		String targetDirectory = System.getProperty("user.dir") + "/testPackage/";
+		String zipFilePath = System.getProperty("user.dir") + + File.separatorChar + "test" + File.separatorChar + "Assignment_Submissions.zip"; // Destination directory for the
+		String targetDirectory = System.getProperty("user.dir") + File.separatorChar+ "testPackage" + File.separatorChar;
 		unzipJavaProject(zipFilePath, targetDirectory);
 	}
 	

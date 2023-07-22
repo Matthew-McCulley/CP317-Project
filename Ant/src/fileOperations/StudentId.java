@@ -13,11 +13,12 @@ public class StudentId {
 		boolean found = false;
 		String id = "";
 		String[] files = new String[5];
-		files[0] = System.getProperty("user.dir") + "/src/cp213/Palindrome.java";
-		files[1] = System.getProperty("user.dir") + "/src/cp213/Device.java";
-		files[2] = System.getProperty("user.dir") + "/src/cp213/LeapYear.java";
-		files[3] = System.getProperty("user.dir") + "/src/cp213/Encipher.java";
-		files[4] = System.getProperty("user.dir") + "/src/cp213/Valid.java";
+		files[0] = System.getProperty("user.dir") + File.separatorChar + "src" +File.separatorChar+ "cp213" +File.separatorChar+"Palindrome.java";
+		files[1] = System.getProperty("user.dir") + File.separatorChar + "src" +File.separatorChar+ "cp213" +File.separatorChar+"Device.java";
+		files[2] = System.getProperty("user.dir") + File.separatorChar + "src" +File.separatorChar+ "cp213" +File.separatorChar+"LeapYear.java";
+		files[3] = System.getProperty("user.dir") + File.separatorChar + "src" +File.separatorChar+ "cp213" +File.separatorChar+"Encipher.java";
+		files[4] = System.getProperty("user.dir") + File.separatorChar + "src" +File.separatorChar+ "cp213" +File.separatorChar+"Valid.java";
+
 
 		for (int i = 0; i < 5; i++) {
 			try (FileReader fileReader = new FileReader(files[i])) {
@@ -49,7 +50,7 @@ public class StudentId {
 	
 	public static boolean checkIfFileExists() {
 		boolean flag = true;
-		String filePath = System.getProperty("user.dir") + "/src/cp213/LeapYear.java";
+		String filePath = System.getProperty("user.dir") + File.separatorChar + "src" +File.separatorChar+ "cp213" +File.separatorChar+"Palindrome.java";
 		try (FileReader fileReader = new FileReader(filePath)) {
 			try (BufferedReader bufferedReader = new BufferedReader(fileReader)) {
 			} catch (IOException e) {
