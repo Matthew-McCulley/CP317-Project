@@ -21,13 +21,15 @@
 	</target>
 	
 	<target name = "clean-preLoop">
-		<fileset dir="testPackage">
-			<include name="**/*"/>
-		</fileset>
-		
-		<fileset dir="markedFiles">
-			<include name="**/*"/>
-		</fileset>
+		<delete>
+			<fileset dir="testPackage">
+				<include name="**/*"/>
+			</fileset>
+			
+			<fileset dir="markedFiles" >
+				<include name="**/*"/>
+			</fileset>
+		</delete>
 	</target>
 	
 	<target name="run-test-unzip" depends = "clean-preLoop, compile-test-unzip">

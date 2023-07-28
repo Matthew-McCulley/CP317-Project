@@ -1,18 +1,76 @@
 package unzip;
 
+
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-public class TestUnzip {
 
-	public static void main(String[] args) {
-		String zipFilePath = System.getProperty("user.dir") + File.separatorChar + "test" + File.separatorChar + "Assignment_Submissions.zip"; // Destination directory for the
-		String targetDirectory = System.getProperty("user.dir") + File.separatorChar+ "testPackage" + File.separatorChar;
-		unzipJavaProject(zipFilePath, targetDirectory);
-	}
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
+public class TestUnzip extends JFrame {
+    private JLabel label;
+    private JButton browseButton;
+    private String zipFilePath;
+    private String targetDirectory;
+
+    public TestUnzip() {
+        label = new JLabel("Please select a zip file that has 'Testing_Assignment' Substring in it.");
+        browseButton = new JButton("Browse");
+
+        browseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                int returnValue = fileChooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    zipFilePath = selectedFile.getAbsolutePath();
+                    targetDirectory = System.getProperty("user.dir") + File.separatorChar + "testPackage" + File.separatorChar;
+
+                    // Check if the selected file is named "Assignment_Submission.zip"
+                    if (selectedFile.getName().contains("Testing_Assignment")) {
+                        unzipJavaProject(zipFilePath, targetDirectory);
+                        displayMessage("Java project extracted successfully.");
+
+                        // Close the GUI window after processing
+                        dispose();
+                    } else {
+                        displayMessage("File must contain a string of characters saying 'Testing_Assignment'.");
+                    }
+                }
+            }
+        });
+
+        setLayout(new FlowLayout());
+        add(label);
+        add(browseButton);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Unzip Program");
+        setSize(500, 120);
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new TestUnzip();
+            }
+        });
+    }
 	
 	public static void unzipJavaProject(String zipFilePath, String targetDirectory) {
 		byte[] buffer = new byte[1024];
@@ -45,7 +103,10 @@ public class TestUnzip {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
+	
+	public void displayMessage(String message) {
+        JOptionPane.showMessageDialog(null, message);
+    }
 
 }

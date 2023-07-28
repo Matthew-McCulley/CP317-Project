@@ -20,7 +20,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.spire.doc.documents.*;
 
-import exportResults.Csv;
+import exportResults.CsvOutput;
 
 import com.spire.doc.*;
 
@@ -41,41 +41,44 @@ public class TestSuite {
 		}
 
 		Document document = new Document();
-		// Create a ByteArrayOutputStream to capture console output
+		
+		//outputStream to capture output to console
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-		// Create a custom PrintStream that writes to the ByteArrayOutputStream
-		PrintStream customPrintStream = new PrintStream(outputStream);
+		//printStream that writes to output stream
+		PrintStream printStream = new PrintStream(outputStream);
 
-		// Redirect System.out to the custom PrintStream
-		System.setOut(customPrintStream);
+		//put System.out.print to customePrint Stream
+		System.setOut(printStream);
 
 		//start running tests
 		junit.addListener(listener);
 		Result result = junit.run(TestSuite.class);
 		listener.printTestResults(result);
 
-		// Reset System.out to the original PrintStream
+		// put System.out.print back to original setting
 		System.setOut(System.out);
 
-		// Convert the captured console output to a string
+		//get that ByteArray to String
 		String consoleOutput = outputStream.toString();
 
-		// Append the console output to the Word document
+		// append to the Word document
 		Section section = document.addSection();
 		Paragraph paragraph = section.addParagraph();
 		paragraph.setText(consoleOutput);
 
+		//save
 		int index = args[0].indexOf("testPackage" + File.separatorChar) + ("testPackage" + File.separatorChar).length();
 		String markedFileName = args[0].substring(index);
 		markedFileName += " marked";
 		document.saveToFile(System.getProperty("user.dir") +File.separatorChar +"markedFiles" + File.separatorChar + markedFileName + ".docx",
 				FileFormat.Docx);
 
+		//writing to csv
 		if (flag) {
 			try {
 				System.out.println(studentId);
-				Csv.writeMarkToFile(listener.passedTests, studentId);
+				CsvOutput.writeMarkToFile(listener.passedTests, studentId);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

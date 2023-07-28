@@ -11,7 +11,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 
-public class Csv {
+public class CsvOutput {
 	public static void writeMarkToFile(Integer mark, String studentId) throws IOException {
 		String filePath = System.getProperty("user.dir") +  File.separatorChar + "Marks.csv";
 		String rowTitle = "#" + studentId;

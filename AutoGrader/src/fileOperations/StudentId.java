@@ -8,17 +8,21 @@ import java.io.IOException;
 import java.util.List;
 
 public class StudentId {
-	
+
 	public static String getStudentId() {
 		boolean found = false;
 		String id = "";
 		String[] files = new String[5];
-		files[0] = System.getProperty("user.dir") + File.separatorChar + "src" +File.separatorChar+ "cp213" +File.separatorChar+"Palindrome.java";
-		files[1] = System.getProperty("user.dir") + File.separatorChar + "src" +File.separatorChar+ "cp213" +File.separatorChar+"Device.java";
-		files[2] = System.getProperty("user.dir") + File.separatorChar + "src" +File.separatorChar+ "cp213" +File.separatorChar+"LeapYear.java";
-		files[3] = System.getProperty("user.dir") + File.separatorChar + "src" +File.separatorChar+ "cp213" +File.separatorChar+"Encipher.java";
-		files[4] = System.getProperty("user.dir") + File.separatorChar + "src" +File.separatorChar+ "cp213" +File.separatorChar+"Valid.java";
-
+		files[0] = System.getProperty("user.dir") + File.separatorChar + "src" + File.separatorChar + "cp213"
+				+ File.separatorChar + "Palindrome.java";
+		files[1] = System.getProperty("user.dir") + File.separatorChar + "src" + File.separatorChar + "cp213"
+				+ File.separatorChar + "Device.java";
+		files[2] = System.getProperty("user.dir") + File.separatorChar + "src" + File.separatorChar + "cp213"
+				+ File.separatorChar + "LeapYear.java";
+		files[3] = System.getProperty("user.dir") + File.separatorChar + "src" + File.separatorChar + "cp213"
+				+ File.separatorChar + "Encipher.java";
+		files[4] = System.getProperty("user.dir") + File.separatorChar + "src" + File.separatorChar + "cp213"
+				+ File.separatorChar + "Valid.java";
 
 		for (int i = 0; i < 5; i++) {
 			try (FileReader fileReader = new FileReader(files[i])) {
@@ -41,24 +45,35 @@ public class StudentId {
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
 			}
-			if(found) {
+			if (found) {
 				break;
 			}
 		}
 		return id;
 	}
-	
-	public static boolean checkIfFileExists() {
-		boolean flag = true;
-		String filePath = System.getProperty("user.dir") + File.separatorChar + "src" +File.separatorChar+ "cp213" +File.separatorChar+"Palindrome.java";
-		try (FileReader fileReader = new FileReader(filePath)) {
-			try (BufferedReader bufferedReader = new BufferedReader(fileReader)) {
-			} catch (IOException e) {
 
-				flag = false;
+	public static boolean checkIfFileExists() {
+		boolean flag = false;
+		String[] files = new String[5];
+		files[0] = System.getProperty("user.dir") + File.separatorChar + "src" + File.separatorChar + "cp213"
+				+ File.separatorChar + "Palindrome.java";
+		files[1] = System.getProperty("user.dir") + File.separatorChar + "src" + File.separatorChar + "cp213"
+				+ File.separatorChar + "Device.java";
+		files[2] = System.getProperty("user.dir") + File.separatorChar + "src" + File.separatorChar + "cp213"
+				+ File.separatorChar + "LeapYear.java";
+		files[3] = System.getProperty("user.dir") + File.separatorChar + "src" + File.separatorChar + "cp213"
+				+ File.separatorChar + "Encipher.java";
+		files[4] = System.getProperty("user.dir") + File.separatorChar + "src" + File.separatorChar + "cp213"
+				+ File.separatorChar + "Valid.java";
+		for (int i = 0; i < files.length && !flag; i++) {
+			try (FileReader fileReader = new FileReader(files[i])) {
+				try (BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+					//found
+					flag = true;
+				} catch (IOException e) {
+				}
+			} catch (IOException e) {
 			}
-		} catch (IOException e) {
-			flag = false;
 		}
 		return flag;
 	}
