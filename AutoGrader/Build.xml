@@ -19,8 +19,18 @@
 			</classpath>
 			</javac>
 	</target>
-			 
-	<target name="run-test-unzip" depends = "compile-test-unzip">
+	
+	<target name = "clean-preLoop">
+		<fileset dir="testPackage">
+			<include name="**/*"/>
+		</fileset>
+		
+		<fileset dir="markedFiles">
+			<include name="**/*"/>
+		</fileset>
+	</target>
+	
+	<target name="run-test-unzip" depends = "clean-preLoop, compile-test-unzip">
 		<java classname="unzip.TestUnzip" classpath="bin" fork="true">
 		</java>
 	</target>
@@ -39,7 +49,7 @@
 		<delete>
 		   <fileset dir="src/cp213">
 		      <include name="**/*"/>
-		   </fileset>
+		   </fileset>	
 		</delete>
 		<available file="bin/cp213" property="bin.cp213.present"/>
 
@@ -47,7 +57,7 @@
 		        <available file="bin/cp213" type="dir"/>
 		        <then>
 		        	<delete>
-		        		<fileset dir="src/cp213">
+		        		<fileset dir="bin/cp213">
 		        			 <include name="**/*"/>
 		        		</fileset>
 		        	</delete>
